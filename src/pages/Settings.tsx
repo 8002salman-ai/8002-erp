@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Building2, MapPin, Save, Download, Trash2, Shield, Database, Upload } from 'lucide-react';
+import { Building2, MapPin, Save, Download, Trash2, Shield, Database, Upload, Bot } from 'lucide-react';
 import { useDataStore, useAuthStore } from '../store/useStore';
 import { US_STATES } from '../types';
 import { Button, Card, Input, Select, Toast } from '../components/ui';
@@ -371,6 +371,35 @@ const Settings: React.FC = () => {
                 ))}
               </div>
             )}
+          </div>
+        </div>
+      </Card>
+
+      {/* AI Assistant */}
+      <Card>
+        <div className="flex items-center gap-4 mb-6">
+          <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
+            <Bot className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+          </div>
+          <div>
+            <h2 className="text-lg font-semibold text-slate-900 dark:text-white">AI Assistant</h2>
+            <p className="text-sm text-slate-500 dark:text-slate-400">Configure Ask AI using your OpenRouter API key</p>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <Input
+            label="OpenRouter API Key"
+            type="password"
+            value={formData.aiApiKey || ''}
+            onChange={(e) => handleChange('aiApiKey', e.target.value)}
+            placeholder="sk-or-v1-..."
+            hint="Yehi API key Ask AI floating button aur sales/buying autofill dono mein use hogi."
+          />
+          <div className="p-3 rounded-lg border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-900/20">
+            <p className="text-sm text-blue-800 dark:text-blue-300">
+              AI assistant aapke current sales, purchases, clients, suppliers aur inventory context ke sath jawab dega.
+            </p>
           </div>
         </div>
       </Card>

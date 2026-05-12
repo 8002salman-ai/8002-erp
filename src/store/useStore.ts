@@ -71,7 +71,8 @@ const defaultSettings: Settings = {
   businessAddress: '',
   businessPhone: '',
   businessEmail: 'admin@8002erp.com',
-  adminPassword: 'Admin123@@@'
+  adminPassword: 'Admin123@@@',
+  aiApiKey: ''
 };
 
 const defaultAdmin: User = {

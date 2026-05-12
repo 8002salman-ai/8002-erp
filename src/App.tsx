@@ -14,6 +14,7 @@ import VAManagement from './pages/VAManagement';
 import Reports from './pages/Reports';
 import Settings from './pages/Settings';
 import Layout from './components/layout/Layout';
+import AskAIFloating from './components/ai/AskAIFloating';
 
 // Protected Route - checks auth & optional permission
 const ProtectedRoute: React.FC<{
@@ -50,6 +51,7 @@ const App: React.FC = () => {
 
   return (
     <BrowserRouter>
+      <AskAIFloating />
       <Routes>
         <Route path="/login" element={isAuthenticated ? <Navigate to="/" replace /> : <Login />} />
 

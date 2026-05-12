@@ -229,6 +229,7 @@ export interface Settings {
   businessPhone?: string;
   businessEmail?: string;
   adminPassword?: string;
+  aiApiKey?: string;
 }
 
 export const MARKETPLACES = [

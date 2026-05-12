@@ -1,5 +1,6 @@
-type AutofillContext = 'sales' | 'purchases' | 'inventory';
+import { useDataStore } from '../store/useStore';
 
+type AutofillContext = 'sales' | 'purchases' | 'inventory';
 type AutofillFieldValue = string | number | null | undefined;
 type AutofillResult = Record<string, AutofillFieldValue>;
 
@@ -110,9 +111,10 @@ function sanitizeFields(result: AutofillResult): AutofillResult {
 }
 
 export async function extractAutofillFromDocument(file: File, context: AutofillContext): Promise<AutofillResult> {
-  const apiKey = import.meta.env.VITE_OPENROUTER_API_KEY as string | undefined;
+  const settingsKey = useDataStore.getState().settings.aiApiKey;
+  const apiKey = settingsKey || (import.meta.env.VITE_OPENROUTER_API_KEY as string | undefined);
   if (!apiKey) {
-    throw new Error('AI autofill unavailable. Please add VITE_OPENROUTER_API_KEY and try again.');
+    throw new Error('AI autofill unavailable. Please add OpenRouter API key in Settings and try again.');
   }
   const normalizedKey = apiKey.trim();
   if (!normalizedKey || /\s/.test(normalizedKey)) {
