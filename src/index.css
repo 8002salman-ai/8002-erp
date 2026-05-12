@@ -1,0 +1,295 @@
+@import "tailwindcss";
+
+/* ================================================
+   ENABLE CLASS-BASED DARK MODE FOR TAILWIND V4
+   This is the critical fix - without this line,
+   dark: variants only respond to OS preference,
+   NOT the .dark class on <html>
+   ================================================ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ================================================
+   BASE STYLES
+   ================================================ */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+  }
+
+  body {
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+/* ================================================
+   UTILITIES
+   ================================================ */
+@layer utilities {
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ================================================
+   COMPONENT STYLES
+   ================================================ */
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+
+/* Modal overlay - fixed z-index above everything */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  position: relative;
+  z-index: 10000;
+  width: 100%;
+  max-height: calc(100vh - 2rem);
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  color: #0f172a;
+}
+
+.dark .modal-content {
+  background-color: #1e293b;
+  color: #f1f5f9;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-fadeIn { animation: fadeIn 0.25s ease-out forwards; }
+.animate-scaleIn { animation: scaleIn 0.2s ease-out forwards; }
+.animate-slideIn { animation: slideIn 0.25s ease-out forwards; }
+
+/* Card hover */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Hide number spinners */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* ================================================
+   GLOBAL DARK MODE OVERRIDES
+   Ensures pages that have bare bg-white, text-slate-900
+   etc. without explicit dark: classes still look right.
+   ================================================ */
+.dark body {
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+
+/* Force bg-white elements to dark in dark mode */
+.dark .bg-white {
+  background-color: #1e293b !important;
+}
+
+/* Force bg-slate-50 elements */
+.dark .bg-slate-50 {
+  background-color: #0f172a !important;
+}
+
+/* Force bg-slate-100 */
+.dark .bg-slate-100 {
+  background-color: #1e293b !important;
+}
+
+/* Text colors */
+.dark .text-slate-900 {
+  color: #f1f5f9 !important;
+}
+.dark .text-slate-800 {
+  color: #e2e8f0 !important;
+}
+.dark .text-slate-700 {
+  color: #cbd5e1 !important;
+}
+.dark .text-slate-600 {
+  color: #94a3b8 !important;
+}
+.dark .text-slate-500 {
+  color: #64748b !important;
+}
+
+/* Borders */
+.dark .border-slate-200 {
+  border-color: #334155 !important;
+}
+.dark .border-slate-100 {
+  border-color: #1e293b !important;
+}
+.dark .border-slate-300 {
+  border-color: #475569 !important;
+}
+
+/* Background overrides for specific patterns */
+.dark .bg-red-50 {
+  background-color: rgba(220, 38, 38, 0.15) !important;
+}
+.dark .bg-emerald-50 {
+  background-color: rgba(16, 185, 129, 0.15) !important;
+}
+.dark .bg-amber-50 {
+  background-color: rgba(245, 158, 11, 0.15) !important;
+}
+.dark .bg-blue-50 {
+  background-color: rgba(59, 130, 246, 0.15) !important;
+}
+.dark .bg-purple-50 {
+  background-color: rgba(139, 92, 246, 0.15) !important;
+}
+.dark .bg-orange-50 {
+  background-color: rgba(249, 115, 22, 0.15) !important;
+}
+
+/* Colored text in dark mode */
+.dark .text-red-700 {
+  color: #fca5a5 !important;
+}
+.dark .text-emerald-700 {
+  color: #6ee7b7 !important;
+}
+.dark .text-amber-700 {
+  color: #fcd34d !important;
+}
+.dark .text-blue-700 {
+  color: #93c5fd !important;
+}
+.dark .text-purple-700 {
+  color: #c4b5fd !important;
+}
+.dark .text-amber-800 {
+  color: #fcd34d !important;
+}
+.dark .text-red-800 {
+  color: #fca5a5 !important;
+}
+.dark .text-blue-800 {
+  color: #93c5fd !important;
+}
+.dark .text-purple-800 {
+  color: #c4b5fd !important;
+}
+
+/* Fix placeholder text in dark mode */
+.dark .placeholder-slate-400::placeholder,
+.dark .placeholder\:text-slate-400::placeholder {
+  color: #64748b !important;
+}
+
+/* Fix select/input backgrounds in dark mode */
+.dark select,
+.dark input:not([type="checkbox"]):not([type="radio"]),
+.dark textarea {
+  background-color: #1e293b;
+  color: #e2e8f0;
+  border-color: #475569;
+}
+
+.dark select:focus,
+.dark input:focus,
+.dark textarea:focus {
+  border-color: #dc2626;
+}
+
+/* Fix option elements in dark mode */
+.dark option {
+  background-color: #1e293b;
+  color: #e2e8f0;
+}
+
+/* Shadow adjustments for dark mode */
+.dark .shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Fix hover states */
+.dark .hover\:bg-slate-50:hover {
+  background-color: #1e293b !important;
+}
+.dark .hover\:bg-slate-100:hover {
+  background-color: #334155 !important;
+}
+
+/* Divide colors */
+.dark .divide-slate-100 > :not(:last-child) {
+  border-color: #334155 !important;
+}
+.dark .divide-slate-200 > :not(:last-child) {
+  border-color: #334155 !important;
+}
+
+/* Login page fix */
+.dark .bg-slate-50.border.border-slate-200 {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+/* Fix backdrop */
+.dark .bg-white\/80 {
+  background-color: rgba(15, 23, 42, 0.8) !important;
+}

@@ -1,0 +1,7 @@
+node_modules
+dist
+.env
+backend/database.sqlite
+backend/node_modules
+.vercel
+.env*.local
