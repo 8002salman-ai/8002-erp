@@ -58,16 +58,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             {!isCollapsed ? (
               <Link to="/" onClick={handleNavClick} className="flex items-center gap-3 min-w-0">
                 <div className="w-9 h-9 bg-gradient-to-br from-red-500 to-red-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-bold text-lg">E</span>
+                  <span className="text-white font-bold text-lg">8</span>
                 </div>
                 <div className="flex items-baseline gap-1 min-w-0">
-                  <span className="text-white font-bold text-lg truncate">{settings.businessName.split(' ')[0]}</span>
-                  <span className="text-red-500 font-bold text-lg flex-shrink-0">LLC</span>
+                  <span className="text-white font-bold text-lg truncate">{settings.businessName}</span>
                 </div>
               </Link>
             ) : (
               <div className="w-9 h-9 bg-gradient-to-br from-red-500 to-red-700 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">E</span>
+                <span className="text-white font-bold text-lg">8</span>
               </div>
             )}
             <button onClick={() => setIsMobileOpen(false)} className="lg:hidden p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800">

@@ -5,7 +5,7 @@ import App from "./App";
 
 // Theme is still safe to keep locally for UX (not accounting data).
 try {
-  const savedUI = localStorage.getItem('embani-ui');
+  const savedUI = localStorage.getItem('8002-ui') || localStorage.getItem('embani-ui');
   if (savedUI) {
     const { state } = JSON.parse(savedUI);
     if (state?.theme === 'dark') {

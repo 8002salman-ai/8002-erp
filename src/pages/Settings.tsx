@@ -95,7 +95,7 @@ const Settings: React.FC = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `embani_backup_${new Date().toISOString().split('T')[0]}.json`;
+    a.download = `8002_erp_backup_${new Date().toISOString().split('T')[0]}.json`;
     a.click();
     URL.revokeObjectURL(url);
     setToast({ message: 'Data exported successfully', type: 'success' });
@@ -136,6 +136,9 @@ const Settings: React.FC = () => {
   
   const handleClearData = () => {
     if (confirm('⚠️ WARNING: This will delete ALL your data permanently!\n\nAre you absolutely sure?')) {
+      localStorage.removeItem('8002-data');
+      localStorage.removeItem('8002-auth');
+      localStorage.removeItem('8002-ui');
       localStorage.removeItem('embani-data');
       localStorage.removeItem('embani-auth');
       localStorage.removeItem('embani-ui');
@@ -178,7 +181,7 @@ const Settings: React.FC = () => {
             label="Business Name"
             value={formData.businessName}
             onChange={(e) => handleChange('businessName', e.target.value)}
-            placeholder="Embani LLC"
+            placeholder="8002 ERP"
           />
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

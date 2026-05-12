@@ -62,7 +62,7 @@ interface UIState {
 }
 
 const defaultSettings: Settings = {
-  businessName: 'Embani LLC',
+  businessName: '8002 ERP',
   state: 'CA',
   taxRate: 0.0725,
   businessStructure: 'llc',
@@ -70,15 +70,15 @@ const defaultSettings: Settings = {
   businessCompanyNumber: '',
   businessAddress: '',
   businessPhone: '',
-  businessEmail: 'admin@embani.com',
+  businessEmail: 'admin@8002erp.com',
   adminPassword: 'Admin123@@@'
 };
 
 const defaultAdmin: User = {
   id: 'admin-001',
-  email: 'admin@embani.com',
+  email: 'admin@8002erp.com',
   password: 'Admin123@@@',
-  name: 'Admin',
+  name: '8002 Admin',
   role: 'ADMIN',
   commissionType: 'fixed',
   commissionRate: 0,
@@ -115,7 +115,7 @@ export const useAuthStore = create<AuthState>()(
         set({ currentUser: null, isAuthenticated: false });
       }
     }),
-    { name: 'embani-auth' }
+    { name: '8002-auth' }
   )
 );
 
@@ -397,7 +397,7 @@ export const useDataStore = create<DataState>()(
         }));
       },
     }),
-    { name: 'embani-data' }
+    { name: '8002-data' }
   )
 );
 
@@ -433,7 +433,7 @@ export const useUIStore = create<UIState>()(
       }
     }),
     { 
-      name: 'embani-ui',
+      name: '8002-ui',
       onRehydrateStorage: () => (state) => {
         // Apply theme on page load
         if (state && typeof document !== 'undefined') {

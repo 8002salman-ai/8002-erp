@@ -1,5 +1,5 @@
 -- =========================================================
--- Embani Accounting System - Supabase/Postgres Schema
+-- 8002 ERP Accounting System - Supabase/Postgres Schema
 -- =========================================================
 -- How to apply:
 -- 1) Supabase Dashboard → SQL editor → New query → paste & run
@@ -41,7 +41,7 @@ for each row execute function public.set_updated_at();
 -- ---------------------------------------------------------
 create table if not exists public.settings (
   id uuid primary key default uuid_generate_v4(),
-  business_name text not null default 'Embani LLC',
+  business_name text not null default '8002 ERP',
   state text not null default 'CA',
   tax_rate numeric not null default 0.0725,
   business_structure text not null default 'llc',

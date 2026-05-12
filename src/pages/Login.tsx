@@ -10,8 +10,16 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
   const { login } = useAuthStore();
   const { settings, users } = useDataStore();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+
+  const defaultAdmin = {
+    email: settings.businessEmail || 'admin@8002erp.com',
+    password: settings.adminPassword || 'Admin123@@@',
+    name: '8002 Admin',
+    role: 'ADMIN' as const,
+  };
+
+  const [email, setEmail] = useState(defaultAdmin.email);
+  const [password, setPassword] = useState(defaultAdmin.password);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -23,19 +31,11 @@ const Login: React.FC = () => {
   const [forgotSent, setForgotSent] = useState(false);
   const [forgotError, setForgotError] = useState('');
 
-  const defaultAdmin = {
-    email: settings.businessEmail || 'admin@embani.com',
-    password: settings.adminPassword || 'admin123',
-    name: 'Admin',
-    role: 'ADMIN' as const,
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const performLogin = async (loginEmail: string, loginPassword: string) => {
     setLoading(true);
     setError('');
     await new Promise(resolve => setTimeout(resolve, 800));
-    const result = login(email, password);
+    const result = login(loginEmail, loginPassword);
     if (result.success) {
       setToast({ message: 'Welcome back!', type: 'success' });
       setTimeout(() => navigate('/'), 500);
@@ -43,6 +43,17 @@ const Login: React.FC = () => {
       setError(result.error || 'Invalid credentials');
     }
     setLoading(false);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await performLogin(email, password);
+  };
+
+  const handleQuickAdminSignIn = async () => {
+    setEmail(defaultAdmin.email);
+    setPassword(defaultAdmin.password);
+    await performLogin(defaultAdmin.email, defaultAdmin.password);
   };
 
   const handleForgotPassword = async () => {
@@ -83,8 +94,7 @@ const Login: React.FC = () => {
             <Building2 style={{ width: 28, height: 28, color: 'white' }} />
           </div>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
-            <span style={{ color: 'white', fontWeight: 700, fontSize: 24 }}>{settings.businessName.split(' ')[0]}</span>
-            <span style={{ color: '#ef4444', fontWeight: 700, fontSize: 24 }}>LLC</span>
+            <span style={{ color: 'white', fontWeight: 700, fontSize: 24 }}>{settings.businessName}</span>
           </div>
         </div>
         <div style={{ position: 'relative', zIndex: 10 }}>
@@ -120,8 +130,7 @@ const Login: React.FC = () => {
               <Building2 style={{ width: 28, height: 28, color: 'white' }} />
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
-              <span style={{ color: '#0f172a', fontWeight: 700, fontSize: 24 }}>{settings.businessName.split(' ')[0]}</span>
-              <span style={{ color: '#ef4444', fontWeight: 700, fontSize: 24 }}>LLC</span>
+              <span style={{ color: '#0f172a', fontWeight: 700, fontSize: 24 }}>{settings.businessName}</span>
             </div>
           </div>
 
@@ -209,6 +218,17 @@ const Login: React.FC = () => {
               style={{ width: '100%', paddingTop: 14, paddingBottom: 14, fontSize: 16 }}>
               <span>Sign In</span>
               <ArrowRight style={{ width: 20, height: 20 }} />
+            </Button>
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={handleQuickAdminSignIn}
+              loading={loading}
+              className="w-full mt-3"
+              size="lg"
+              style={{ width: '100%', paddingTop: 14, paddingBottom: 14, fontSize: 15 }}
+            >
+              One-Click Admin Sign In
             </Button>
           </form>
 

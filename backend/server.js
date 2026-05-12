@@ -41,7 +41,7 @@ db.serialize(() => {
 });
 
 app.get("/", (req, res) => {
-    res.send("Embani LLC Backend Running");
+    res.send("8002 ERP Backend Running");
 });
 
 app.get("/customers", (req, res) => {

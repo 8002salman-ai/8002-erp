@@ -160,7 +160,7 @@ export async function extractAutofillFromDocument(file: File, context: AutofillC
         Authorization: `Bearer ${normalizedKey}`,
         'Content-Type': 'application/json',
         'HTTP-Referer': window.location.origin,
-        'X-Title': 'Embani Accounting System',
+        'X-Title': '8002 ERP Accounting System',
       },
       body: JSON.stringify({
         model,
